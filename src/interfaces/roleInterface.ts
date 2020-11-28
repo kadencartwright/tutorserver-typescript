@@ -1,3 +1,3 @@
 export interface RoleInterface{
-    type: string
+    type?: string
 }

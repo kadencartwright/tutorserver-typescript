@@ -1,3 +1,4 @@
+import { UserInterface } from './../interfaces/userInterface';
 import { User } from './../models/User';
 import { Role } from './../models/Role';
 import { TokenInterface } from './../interfaces/tokenInterface';
@@ -48,13 +49,22 @@ let createUser:(req:Request,res:Response)=>void= async (req:Request,res:Response
     }
     //get an authservice instance  
     let authService = Container.get(AuthService)
-    let roles:Role[];
-    roles = await Role.find({type:'student'})
-    let user:User = new User(req.body.email,req.body.firstName,req.body.lastName,req.body.phoneNumber,req.body.password,roles)
-    authService.createUser(user);
-    res.send('done')
-    
+    let userData:UserInterface = {
+        email:req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        phoneNum: req.body.phoneNumber,
+        password:req.body.password
+    }
+
+        if (await authService.createUser(userData)==null){
+            res.send('user already exists')
+        }else{
+            res.send('done');
+        }
+
 }
+
 
 
 export {login, createUser}

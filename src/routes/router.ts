@@ -1,17 +1,10 @@
 import {Router}  from 'express';
-import { User } from '../models/User';
-import { Role } from '../models/Role';
-import {check, validationResult} from 'express-validator'
-import { TokenInterface } from '../interfaces/tokenInterface';
-import { LoginInterface } from '../interfaces/loginInterface';
-import {Container} from 'typedi';
-import AuthService from '../services/AuthService';
-import UserService from '../services/UserService';
+import {check} from 'express-validator'
 import * as apiController from '../controllers/apiController'
 import * as authController from'../controllers/authController'
 var router: Router = Router();
 var apiRouter: Router = Router();
-
+var authRouter: Router = Router()
 
 /**
  * Root Routes
@@ -34,9 +27,7 @@ router.get('/', (req,res)=>{
          * Auth Routes
          * (/api/v1/auth/*) 
          */
-        apiRouter.use('/auth', authRouter);
-        var authRouter: Router = Router();
-
+        apiRouter.use('/auth',authRouter)
 
         authRouter.post('/login',[
             check('email').isEmail(),

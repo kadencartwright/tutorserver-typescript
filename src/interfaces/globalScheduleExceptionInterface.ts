@@ -1,11 +1,9 @@
 import { ChangeCode } from '../models/enums/ChangeCode';
 export interface GlobalScheduleExceptionInterface{
-    id: string
+    id?: string
+    startTime?: number
 
+    endTime?: number
 
-    startTime: number
-
-    endTime: number
-
-    changeCode:ChangeCode
+    changeCode?:ChangeCode
 }

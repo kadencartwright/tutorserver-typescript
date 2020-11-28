@@ -1,3 +1,5 @@
+import { Role } from './../models/Role';
+import { UserInterface } from './../interfaces/userInterface';
 import { LoginInterface } from '../interfaces/loginInterface';
 import { TokenInterface } from '../interfaces/tokenInterface';
 import { hash,compare } from 'bcrypt';
@@ -20,10 +22,18 @@ export default class AuthService{
         }
     }
 
-    createUser: (User:User)=>Promise<User> = async function(user:User){
-        user.password = await this.helpers.hashPassword(user.password)//hash password before creating
-        let result:User = await User.save(user)
-        return result
+    createUser: (userData:UserInterface)=>Promise<User> = async function(userData:UserInterface){
+        let roles:Role[];
+        roles = await Role.find({type:'student'}) //default to create student
+        let user:User = new User(userData.email,userData.firstName,userData.lastName,userData.phoneNum,userData.password,roles)
+        let alreadyExists:boolean = await !!User.findOne(user.email); //if user already exists this returns true
+        if(alreadyExists){
+            return null //return undefined if user already exist
+        }else{
+            user.password = await this.helpers.hashPassword(user.password)//hash password before creating
+            let result:User = await User.save(user)
+            return result
+        }
     }
 
     updatePassword: (user:User, newPassword:String)=>Promise<User> = async function(user:User, newPassword:String){
