@@ -1,6 +1,4 @@
 import { UserInterface } from './../interfaces/userInterface';
-import { User } from './../models/User';
-import { Role } from './../models/Role';
 import { TokenInterface } from './../interfaces/tokenInterface';
 import { LoginInterface } from './../interfaces/loginInterface';
 import {Request,Response} from 'express';
