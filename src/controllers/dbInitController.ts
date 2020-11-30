@@ -10,6 +10,7 @@ import * as initData from '../dbInit'
 import RoleService from '../services/RoleService';
 import CourseService from '../services/CourseService';
 import AvailabilityService from '../services/AvailabilityService';
+import fs from 'fs'
 
 let initDb:(req:Request,res:Response)=>void= async (req:Request,res:Response)=>{
     let authService:AuthService = Container.get(AuthService);
@@ -17,6 +18,17 @@ let initDb:(req:Request,res:Response)=>void= async (req:Request,res:Response)=>{
     let roleService:RoleService = Container.get(RoleService)
     let courseService:CourseService = Container.get(CourseService)
     let availabilityService:AvailabilityService = Container.get(AvailabilityService)
+
+    const storeData = (data, path) => {
+        try {
+          fs.writeFileSync(path, JSON.stringify(data))
+        } catch (err) {
+          console.error(err)
+        }
+      }
+      
+    storeData(initData,'./dbData.json')
+
 /*
     //init roles
     console.log("Creating Roles")
@@ -26,7 +38,7 @@ let initDb:(req:Request,res:Response)=>void= async (req:Request,res:Response)=>{
         await roleService.createRole(element).catch(e=>{console.log(e)})
     });
 
-*/
+
 
 
 
@@ -34,10 +46,18 @@ let initDb:(req:Request,res:Response)=>void= async (req:Request,res:Response)=>{
     console.log("Creating Users")
     initData.users.forEach(async element=>{
         console.log(`Creating User: ${element.userData.email}`)
-        let user:User = await authService.createUser(element.userData)
+        let user:User;
+        await authService.createUser(element.userData).then(e=>{
+            console.table(e)
+            user = e
+        }).then(e=>{})
         let roles:Role[];
         element.roleTypes.forEach(async e=>{
-            let role:Role = await roleService.getRole({type:e.type})
+            let role:Role = await roleService.getRole({type:e.type}).catch(role=>{
+                console.log(role)
+                return role
+            })
+            console.log(role)
             roles.push(role)
         })
         user.roles = roles;
@@ -51,6 +71,7 @@ let initDb:(req:Request,res:Response)=>void= async (req:Request,res:Response)=>{
        await courseService.createCourse(element)
     })
 
+    /*
     //init tutor availability
     await initData.availabilities.forEach(async element=>{
         console.log(`Creating Availability: ${element}`)
@@ -65,7 +86,6 @@ let initDb:(req:Request,res:Response)=>void= async (req:Request,res:Response)=>{
         let course:Course = await Course.findOne(element.courseName)
         await sessionService.createSession({...element.session,tutor:tutor,student:student})
     })
-/*
     */
 }
 

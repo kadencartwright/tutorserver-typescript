@@ -5,7 +5,6 @@ import { SessionInterface } from './interfaces/sessionInterface';
 import { UserInterface } from './interfaces/userInterface';
 import faker from 'faker'
 
-
 let rounds:number = 10;//number of fake entries in for each data type
 
 let roles:RoleInterface[]= [
@@ -21,13 +20,12 @@ for (let i = 0;i<rounds;i++){
     let roleTypes:RoleInterface[] = []
 
     //need some roles to be tutor/admins andsome to be just student or tutor or admin  
-    for(let j = 0; j<roles.length;j++){
+
         if (faker.random.number(3)==1){
             roleTypes.push(roles[1],roles[2])
         }else{
             roleTypes.push(roles[faker.random.number({min:0,max:2})])
         }
-    }
     users.push({
         userData:
         {
@@ -38,15 +36,17 @@ for (let i = 0;i<rounds;i++){
         },
         roleTypes: roleTypes
     })
+
 }
 //availability
 let availabilities: availabilityInit[] = [];
 for (let i = 0;i<rounds;i++){
-    availabilities.push({Availability:{startTime:},tutorEmail:''})
+    availabilities.push({Availability:{startTime:12345},tutorEmail:''})
 }
 
 //sessions
 let sessions:sessionInit[] = [];
+
 
 
 export {users,sessions,roles,availabilities,courses}

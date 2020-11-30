@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "userData": {
+        "firstName": "Lorenz",
+        "lastName": "Beier",
+        "password": "testpassword",
+        "email": "Ike.Zieme@yahoo.com"
+      },
+      "roleTypes": [{ "type": "student" }]
+    },
+    {
+      "userData": {
+        "firstName": "Coralie",
+        "lastName": "Witting",
+        "password": "testpassword",
+        "email": "Zoey.Conn76@yahoo.com"
+      },
+      "roleTypes": [{ "type": "student" }]
+    },
+    {
+      "userData": {
+        "firstName": "Elroy",
+        "lastName": "Crooks",
+        "password": "testpassword",
+        "email": "Kaela52@yahoo.com"
+      },
+      "roleTypes": [{ "type": "admin" }]
+    },
+    {
+      "userData": {
+        "firstName": "Michele",
+        "lastName": "Hermann",
+        "password": "testpassword",
+        "email": "Litzy2@gmail.com"
+      },
+      "roleTypes": [{ "type": "student" }]
+    },
+    {
+      "userData": {
+        "firstName": "Brenna",
+        "lastName": "Ondricka",
+        "password": "testpassword",
+        "email": "Mozelle_Emmerich@gmail.com"
+      },
+      "roleTypes": [{ "type": "admin" }]
+    },
+    {
+      "userData": {
+        "firstName": "Liliana",
+        "lastName": "Roob",
+        "password": "testpassword",
+        "email": "Keven27@gmail.com"
+      },
+      "roleTypes": [{ "type": "tutor" }, { "type": "admin" }]
+    },
+    {
+      "userData": {
+        "firstName": "Vita",
+        "lastName": "Erdman",
+        "password": "testpassword",
+        "email": "Frieda_Reilly@gmail.com"
+      },
+      "roleTypes": [{ "type": "tutor" }]
+    },
+    {
+      "userData": {
+        "firstName": "Keagan",
+        "lastName": "Tromp",
+        "password": "testpassword",
+        "email": "Isai_Weissnat24@yahoo.com"
+      },
+      "roleTypes": [{ "type": "tutor" }]
+    },
+    {
+      "userData": {
+        "firstName": "Greg",
+        "lastName": "Kemmer",
+        "password": "testpassword",
+        "email": "Irma.Turcotte@yahoo.com"
+      },
+      "roleTypes": [{ "type": "tutor" }, { "type": "admin" }]
+    },
+    {
+      "userData": {
+        "firstName": "Corine",
+        "lastName": "Aufderhar",
+        "password": "testpassword",
+        "email": "Leslie.Bogisich@gmail.com"
+      },
+      "roleTypes": [{ "type": "tutor" }]
+    }
+  ],
+  "sessions": [],
+  "roles": [{ "type": "student" }, { "type": "tutor" }, { "type": "admin" }],
+  "availabilities": [
+    { "Availability": { "startTime": 12345 }, "tutorEmail": "" },
+    { "Availability": { "startTime": 12345 }, "tutorEmail": "" },
+    { "Availability": { "startTime": 12345 }, "tutorEmail": "" },
+    { "Availability": { "startTime": 12345 }, "tutorEmail": "" },
+    { "Availability": { "startTime": 12345 }, "tutorEmail": "" },
+    { "Availability": { "startTime": 12345 }, "tutorEmail": "" },
+    { "Availability": { "startTime": 12345 }, "tutorEmail": "" },
+    { "Availability": { "startTime": 12345 }, "tutorEmail": "" },
+    { "Availability": { "startTime": 12345 }, "tutorEmail": "" },
+    { "Availability": { "startTime": 12345 }, "tutorEmail": "" }
+  ],
+  "courses": [
+    { "name": "math1303" },
+    { "name": "math:1308" },
+    { "name": "math1401" },
+    { "name": "math1402" },
+    { "name": "math2301" },
+    { "name": "math3301" }
+  ]
+}
