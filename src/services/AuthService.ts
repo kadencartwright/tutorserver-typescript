@@ -6,6 +6,7 @@ import { hash,compare } from 'bcrypt';
 import { User } from '../models/User';
 import {Service} from 'typedi';
 import {verify,sign} from 'jsonwebtoken';
+import { getConnection } from 'typeorm';
 @Service()
 export default class AuthService{
     private helpers:Helpers
@@ -23,11 +24,14 @@ export default class AuthService{
     }
 
     createUser: (userData:UserInterface)=>Promise<User> = async function(userData:UserInterface){
-        let roles:Role[];
-        roles = await Role.find({type:'student'}) //default to create student
+        let roles:Role[] =[];
+        userData.roles = Array.from(userData.roles)
+        for (let role of userData.roles){
+            roles.push(await Role.findOne(role))
+        }
         let user:User = new User()
         user.init({email:userData.email,firstName:userData.firstName,lastName:userData.lastName,phoneNum:userData.phoneNum,password:userData.password,roles:roles})
-        let alreadyExists:boolean = await !!User.findOne(user.email); //if user already exists this returns true
+        let alreadyExists:boolean = await !!!User.findOne(user.email); //if user already exists this returns true
         if(alreadyExists){
             return null //return undefined if user already exist
         }else{

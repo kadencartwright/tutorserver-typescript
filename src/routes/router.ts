@@ -10,7 +10,7 @@ import * as dbInitController from '../controllers/dbInitController'
 /**
  * Root Routes
  */
-//router.get('/dbInit',dbInitController.initDb) dont need this unless we need to generate a new dbData.json file
+router.get('/dbInit',dbInitController.initDb)// dont need this unless we need to generate a new dbData.json file
 
 
 router.get('/', (req,res)=>{

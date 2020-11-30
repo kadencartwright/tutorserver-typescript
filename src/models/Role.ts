@@ -7,7 +7,8 @@ export class Role extends BaseEntity implements RoleInterface{
     type: string
 
     init: (roleData:RoleInterface) =>void = function(roleData:RoleInterface){
-        roleData.type = this.type
+
+        this.type = roleData.type
     }
 
 

@@ -13,9 +13,9 @@ export default class CourseService{
     }
     createCourse: (courseData:CourseInterface) => Promise<Course> = async function(courseData:CourseInterface){
         courseData.name = courseData.name.toLowerCase()//all courses will be lowercase
-        let alreadyExists:boolean = await !!Course.findOne(courseData.name )
+        let alreadyExists:boolean = await !!!Course.findOne(courseData.name )
         if (alreadyExists){
-            return null 
+            return null
         }
         let course:Course =new Course()//create a new role and pass in the data
         course.init(courseData)

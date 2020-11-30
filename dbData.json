@@ -5,7 +5,8 @@
         "firstName": "Lorenz",
         "lastName": "Beier",
         "password": "testpassword",
-        "email": "Ike.Zieme@yahoo.com"
+        "email": "Ike.Zieme@yahoo.com",
+        "phoneNum":"1234567890"
       },
       "roleTypes": [{ "type": "student" }]
     },
@@ -14,7 +15,8 @@
         "firstName": "Coralie",
         "lastName": "Witting",
         "password": "testpassword",
-        "email": "Zoey.Conn76@yahoo.com"
+        "email": "Zoey.Conn76@yahoo.com",
+        "phoneNum":"1234567890"
       },
       "roleTypes": [{ "type": "student" }]
     },
@@ -23,7 +25,8 @@
         "firstName": "Elroy",
         "lastName": "Crooks",
         "password": "testpassword",
-        "email": "Kaela52@yahoo.com"
+        "email": "Kaela52@yahoo.com",
+        "phoneNum":"1234567890"
       },
       "roleTypes": [{ "type": "admin" }]
     },
@@ -32,7 +35,8 @@
         "firstName": "Michele",
         "lastName": "Hermann",
         "password": "testpassword",
-        "email": "Litzy2@gmail.com"
+        "email": "Litzy2@gmail.com",
+        "phoneNum":"1234567890"
       },
       "roleTypes": [{ "type": "student" }]
     },
@@ -41,7 +45,8 @@
         "firstName": "Brenna",
         "lastName": "Ondricka",
         "password": "testpassword",
-        "email": "Mozelle_Emmerich@gmail.com"
+        "email": "Mozelle_Emmerich@gmail.com",
+        "phoneNum":"1234567890"
       },
       "roleTypes": [{ "type": "admin" }]
     },
@@ -50,7 +55,8 @@
         "firstName": "Liliana",
         "lastName": "Roob",
         "password": "testpassword",
-        "email": "Keven27@gmail.com"
+        "email": "Keven27@gmail.com",
+        "phoneNum":"1234567890"
       },
       "roleTypes": [{ "type": "tutor" }, { "type": "admin" }]
     },
@@ -59,7 +65,8 @@
         "firstName": "Vita",
         "lastName": "Erdman",
         "password": "testpassword",
-        "email": "Frieda_Reilly@gmail.com"
+        "email": "Frieda_Reilly@gmail.com",
+        "phoneNum":"1234567890"
       },
       "roleTypes": [{ "type": "tutor" }]
     },
@@ -68,7 +75,8 @@
         "firstName": "Keagan",
         "lastName": "Tromp",
         "password": "testpassword",
-        "email": "Isai_Weissnat24@yahoo.com"
+        "email": "Isai_Weissnat24@yahoo.com",
+        "phoneNum":"1234567890"
       },
       "roleTypes": [{ "type": "tutor" }]
     },
@@ -77,7 +85,8 @@
         "firstName": "Greg",
         "lastName": "Kemmer",
         "password": "testpassword",
-        "email": "Irma.Turcotte@yahoo.com"
+        "email": "Irma.Turcotte@yahoo.com",
+        "phoneNum":"1234567890"
       },
       "roleTypes": [{ "type": "tutor" }, { "type": "admin" }]
     },
@@ -86,7 +95,8 @@
         "firstName": "Corine",
         "lastName": "Aufderhar",
         "password": "testpassword",
-        "email": "Leslie.Bogisich@gmail.com"
+        "email": "Leslie.Bogisich@gmail.com",
+        "phoneNum":"1234567890"
       },
       "roleTypes": [{ "type": "tutor" }]
     }
@@ -107,7 +117,7 @@
   ],
   "courses": [
     { "name": "math1303" },
-    { "name": "math:1308" },
+    { "name": "math1308" },
     { "name": "math1401" },
     { "name": "math1402" },
     { "name": "math2301" },

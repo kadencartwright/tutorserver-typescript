@@ -14,12 +14,13 @@ export default class RoleService{
     
     createRole: (roleData:RoleInterface) =>Promise<Role> = async function(roleData:RoleInterface){
         roleData.type = roleData.type.toLowerCase()//all roles will be lowercase
-        let alreadyExists:boolean = await !!Role.findOne(roleData.type)
+        let alreadyExists:boolean = await !!!Role.findOne(roleData.type)
         if (alreadyExists){
             return null 
         }
         let role:Role =new Role()//create a new role and pass in the data
         role.init(roleData)
+
         return await Role.save(role)
 
     }

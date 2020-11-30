@@ -1,16 +1,16 @@
-import { Role } from './../models/Role';
-import { Course } from './../models/Course';
-import { User } from './../models/User';
+import { RoleInterface } from './../interfaces/roleInterface';
+
 import { Request,Response } from 'express';
 import { Container } from 'typedi';
 
 import AuthService from '../services/AuthService';
 import SessionService from '../services/SessionService'
-import * as initData from '../dbInit'
 import RoleService from '../services/RoleService';
 import CourseService from '../services/CourseService';
 import AvailabilityService from '../services/AvailabilityService';
 import fs from 'fs'
+
+let initData = JSON.parse(fs.readFileSync('./dbData.json').toString())
 
 let initDb:(req:Request,res:Response)=>void= async (req:Request,res:Response)=>{
     let authService:AuthService = Container.get(AuthService);
@@ -19,76 +19,40 @@ let initDb:(req:Request,res:Response)=>void= async (req:Request,res:Response)=>{
     let courseService:CourseService = Container.get(CourseService)
     let availabilityService:AvailabilityService = Container.get(AvailabilityService)
 
-    const storeData = (data, path) => {
-        try {
-          fs.writeFileSync(path, JSON.stringify(data))
-        } catch (err) {
-          console.error(err)
-        }
-      }
-      
-    storeData(initData,'./dbData.json')
 
-/*
     //init roles
+    console.table(initData.roles)
     console.log("Creating Roles")
-    await initData.roles.forEach(async element => {
-        //initialize role here
-        console.log(`Creating role: ${element.type}`)
-        await roleService.createRole(element).catch(e=>{console.log(e)})
-    });
+    let roles:RoleInterface[] = initData.roles
+    for (let role of roles){
+        console.log(role)
+        console.log(await roleService.createRole(role))
+    }
 
 
-
-
-
-    //init users-- make some tutors, admins, students and tutor/admins
+   //init users-- make some tutors, admins, students and tutor/admins
     console.log("Creating Users")
-    initData.users.forEach(async element=>{
+    for (let element of initData.users){
+        console.log(`initData.user`)
+        console.table(element)
         console.log(`Creating User: ${element.userData.email}`)
-        let user:User;
-        await authService.createUser(element.userData).then(e=>{
-            console.table(e)
-            user = e
-        }).then(e=>{})
-        let roles:Role[];
-        element.roleTypes.forEach(async e=>{
-            let role:Role = await roleService.getRole({type:e.type}).catch(role=>{
-                console.log(role)
-                return role
-            })
-            console.log(role)
-            roles.push(role)
-        })
-        user.roles = roles;
-        await User.save(user).catch(e=>{console.log(e)})
-    })
+        await authService.createUser({...element.userData,roles:element.roleTypes})
+    }
 
-    //init tutor classes
+  
+
+    //init courses
     console.log("Creating Courses")
+    for (let course of initData.courses){
+
+        console.log(`Creating Course: ${course.name}`)
+        await courseService.createCourse(course)
+    }
+
     await initData.courses.forEach(async element=>{
-        console.log(`Creating Course: ${element.name}`)
-       await courseService.createCourse(element)
+        
     })
-
-    /*
-    //init tutor availability
-    await initData.availabilities.forEach(async element=>{
-        console.log(`Creating Availability: ${element}`)
-        let tutor:User = await User.findOne(element.tutorEmail)
-        await availabilityService.createAvailability({...element.Availability,tutor:tutor})
-    })
-
-    //init sessions
-    await initData.sessions.forEach(async element=>{
-        let student:User = await User.findOne(element.userEmail)
-        let tutor:User = await User.findOne(element.tutorEmail)
-        let course:Course = await Course.findOne(element.courseName)
-        await sessionService.createSession({...element.session,tutor:tutor,student:student})
-    })
-    */
 }
-
 
 
 export  {initDb}
