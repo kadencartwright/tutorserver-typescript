@@ -2,7 +2,7 @@
 
 In the project directory, you can run:
 
-### `npm run live`
+### `npm run dev`
 
 Starts the server on $PORT or defaults to port 5000 if no $PORT is specified with live code reload
 
