@@ -25,7 +25,8 @@ export default class AuthService{
     createUser: (userData:UserInterface)=>Promise<User> = async function(userData:UserInterface){
         let roles:Role[];
         roles = await Role.find({type:'student'}) //default to create student
-        let user:User = new User(userData.email,userData.firstName,userData.lastName,userData.phoneNum,userData.password,roles)
+        let user:User = new User()
+        user.init({email:userData.email,firstName:userData.firstName,lastName:userData.lastName,phoneNum:userData.phoneNum,password:userData.password,roles:roles})
         let alreadyExists:boolean = await !!User.findOne(user.email); //if user already exists this returns true
         if(alreadyExists){
             return null //return undefined if user already exist

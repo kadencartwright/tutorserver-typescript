@@ -1,3 +1,4 @@
+import { SessionInterface } from './../interfaces/sessionInterface';
 import {Session} from '../models/Session'
 import {Service} from 'typedi';
 import { getManager } from 'typeorm';
@@ -28,6 +29,11 @@ export default class SessionService{
         return session
     }
 
+    createSession: (sessionData:SessionInterface) => Promise<Session> = async function(sessionData:SessionInterface){
+        let session:Session = new Session()
+        session.init(sessionData)
+        return await Session.save(session)
+    }
 
 
 

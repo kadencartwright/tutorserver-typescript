@@ -1,7 +1,7 @@
 import { SessionInterface } from './../interfaces/sessionInterface';
 import { Course } from './Course';
 import {User} from './User';
-import {Entity, PrimaryGeneratedColumn,OneToOne, Column, ManyToOne, JoinColumn, BaseEntity} from "typeorm"
+import {Entity, PrimaryGeneratedColumn,OneToOne, Column, ManyToOne, JoinColumn, BaseEntity, JoinTable} from "typeorm"
 
 @Entity()
 export class Session extends BaseEntity implements SessionInterface{
@@ -9,8 +9,8 @@ export class Session extends BaseEntity implements SessionInterface{
     id: string;
 
     @ManyToOne(()=>Course)
-    class: Course
-
+    @JoinTable()
+    course: Course
 
     @Column()
     startTime: number;
@@ -24,4 +24,10 @@ export class Session extends BaseEntity implements SessionInterface{
     @OneToOne(()=> User)
     @JoinColumn()
     student: User
+
+
+    init: (sessionData:SessionInterface) =>void = function(sessionData:SessionInterface){
+        this.startTime = sessionData.startTime
+        this.endTime = sessionData.endTime
+    }
 }

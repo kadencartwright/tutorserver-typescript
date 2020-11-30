@@ -1,10 +1,11 @@
+import { User } from './../models/User';
 import { CourseInterface } from './courseInterface';
 import { UserInterface } from './userInterface';
 export interface SessionInterface{
     id?: string;
-    class?: CourseInterface;
+    course?: CourseInterface;
     startTime?: number;
     endTime?: number;
-    tutor?: UserInterface;
-    student?: UserInterface
+    tutor?: User;
+    student?: User
 }

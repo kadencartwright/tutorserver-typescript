@@ -5,16 +5,6 @@ import { kMaxLength } from 'buffer';
 
 @Entity()
 export class User extends BaseEntity implements UserInterface{
-    constructor(email:string,firstName:string,lastName:string, phoneNum:string,password:string,roles:Role[]){
-        super()
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNum = phoneNum;
-        this.password = password
-        this.roles = roles
-        
-    }
 
     @PrimaryColumn()
     email: string
@@ -34,5 +24,14 @@ export class User extends BaseEntity implements UserInterface{
     @ManyToMany(()=>Role)
     @JoinTable()
     roles: Role[]
+
+    init: (userData:UserInterface) =>void = function(userData:UserInterface){
+        this.email = userData.email
+        this.firstName = userData.firstName
+        this.lastName = userData.lastName
+        this.phoneNum = userData.phoneNum
+        this.password = userData.password
+        this.roles = userData.roles
+    }
 
 }

@@ -5,7 +5,6 @@ import "reflect-metadata";
 import {createConnection} from 'typeorm'
 import {json, urlencoded} from 'body-parser';
 
-
 //app setup
 
 
@@ -25,7 +24,7 @@ createConnection({
   database: "tutorDatabase",
   entities: [__dirname + "/models/*.ts"],
   synchronize: false,//change to true to sync with db every time server starts
-  logging: false
+  logging: true
 }).then(connection => {
   // here you can start to work with your entities
 }).catch(error => console.log(error));

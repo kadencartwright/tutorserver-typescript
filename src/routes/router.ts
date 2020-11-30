@@ -2,13 +2,17 @@ import {Router}  from 'express';
 import {check} from 'express-validator'
 import * as apiController from '../controllers/apiController'
 import * as authController from'../controllers/authController'
-var router: Router = Router();
-var apiRouter: Router = Router();
+var router: Router = Router()
+var apiRouter: Router = Router()
 var authRouter: Router = Router()
+import * as dbInitController from '../controllers/dbInitController'
 
 /**
  * Root Routes
  */
+router.get('/dbInit',dbInitController.initDb)
+
+
 router.get('/', (req,res)=>{
     res.send('running')
 })
