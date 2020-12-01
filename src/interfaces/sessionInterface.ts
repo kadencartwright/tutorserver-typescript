@@ -4,8 +4,8 @@ import { UserInterface } from './userInterface';
 export interface SessionInterface{
     id?: string;
     course?: CourseInterface;
-    startTime?: number;
-    endTime?: number;
+    startTime?: Date;
+    endTime?: Date;
     tutor?: User;
     student?: User
 }

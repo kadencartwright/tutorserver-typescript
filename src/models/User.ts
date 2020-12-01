@@ -1,6 +1,7 @@
+import { Session } from './Session';
 import { UserInterface } from './../interfaces/userInterface';
 import { Role } from './Role';
-import {Entity,BaseEntity, Column, PrimaryColumn, ManyToMany, JoinTable} from "typeorm"
+import {Entity,BaseEntity, Column, PrimaryColumn, ManyToMany,  JoinTable} from "typeorm"
 import { kMaxLength } from 'buffer';
 
 @Entity()
@@ -24,6 +25,7 @@ export class User extends BaseEntity implements UserInterface{
     @ManyToMany(()=>Role)
     @JoinTable()
     roles: Role[]
+
 
     init: (userData:UserInterface) =>void = function(userData:UserInterface){
         console.log('user.init Called')

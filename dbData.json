@@ -101,7 +101,24 @@
       "roleTypes": [{ "type": "tutor" }]
     }
   ],
-  "sessions": [],
+  "sessions": [
+    {
+      "course": "math1303",
+      "startTime": 1609781400000,
+      "endTime": 1609785000000,
+      "tutor": "Isai_Weissnat24@yahoo.com",
+      "student":"Litzy2@gmail.com"
+    },
+    {
+      "course": "math1303",
+      "startTime": 1609783200000,
+      "endTime": 1609786800000,
+      "tutor": "Isai_Weissnat24@yahoo.com",
+      "student":"Litzy2@gmail.com"
+    }
+
+
+  ],
   "roles": [{ "type": "student" }, { "type": "tutor" }, { "type": "admin" }],
   "availabilities": [
     { "Availability": { "startTime": 12345 }, "tutorEmail": "" },

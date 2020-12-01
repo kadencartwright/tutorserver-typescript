@@ -1,3 +1,4 @@
+
 import { RoleInterface } from './../interfaces/roleInterface';
 
 import { Request,Response } from 'express';
@@ -47,11 +48,13 @@ let initDb:(req:Request,res:Response)=>void= async (req:Request,res:Response)=>{
 
         console.log(`Creating Course: ${course.name}`)
         await courseService.createCourse(course)
-    }
+    }   
 
-    await initData.courses.forEach(async element=>{
-        
-    })
+    for (let session of initData.sessions){
+        session.startTime = new Date(session.startTime)
+        session.endTime = new Date(session.endTime)
+        await sessionService.createSession(session)
+    }
 }
 
 

@@ -10,7 +10,11 @@ let getSession: (req:Request,res:Response)=>void = async function(req,res){
     }
     const sessionService = Container.get(SessionService)
     let session = await sessionService.getSession(req.body.id)
-    res.status(200).json({session:session})
+    let result:any = {...session}
+    
+    result.startTime = result.startTime.getTime()
+    result.endTime = result.endTime.getTime()
+    res.status(200).json({session:result})
 }
 
 export {getSession}

@@ -23,7 +23,7 @@ createConnection({
   password: "",
   database: "tutorDatabase",
   entities: [__dirname + "/models/*.ts"],
-  synchronize: false,//change to true to sync with db every time server starts
+  synchronize: true,//change to true to sync with db every time server starts
   logging: true
 }).then(connection => {
   // here you can start to work with your entities
