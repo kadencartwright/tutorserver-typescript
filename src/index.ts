@@ -17,11 +17,11 @@ app.use(urlencoded({extended:true}))
 
 createConnection({
   type: "mysql",
-  host: "localhost",
-  port: 3306,
-  username: "root",
-  password: "",
-  database: "tutorDatabase",
+  host: process.env.DB_HOST,
+  port: Number.parseInt(process.env.DB_port),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   entities: [__dirname + "/models/*.ts"],
   synchronize: false,//change to true to sync with db every time server starts or false for production
   logging: true
