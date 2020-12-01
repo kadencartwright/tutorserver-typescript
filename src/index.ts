@@ -14,7 +14,10 @@ const app = express();
 const PORT = process.env.PORT ||3000
 app.use(json())
 app.use(urlencoded({extended:true}))
-
+let entitiesDir: String = '/models/*.ts'
+if (process.env.NODE_ENV == 'PROD'){
+  entitiesDir ='/models/*.js'
+}
 createConnection({
   type: "mysql",
   host: process.env.DB_HOST,
@@ -22,7 +25,7 @@ createConnection({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [__dirname + "/models/*.ts"],
+  entities: [__dirname + entitiesDir],
   synchronize: false,//change to true to sync with db every time server starts or false for production
   logging: true
 }).then(connection => {
