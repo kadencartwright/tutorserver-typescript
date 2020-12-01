@@ -1,6 +1,6 @@
 import {Router}  from 'express';
 import {check} from 'express-validator'
-import * as apiController from '../controllers/apiController'
+import * as sessionController from '../controllers/sessionController'
 import * as authController from'../controllers/authController'
 var router: Router = Router()
 var apiRouter: Router = Router()
@@ -21,11 +21,11 @@ router.get('/', (req,res)=>{
      * API Routes (/api/v1/*) 
      */
     router.use('/api/v1', apiRouter)
-    apiRouter.get('/get-session',
+    apiRouter.get('/session',
     [
         check('id').isString(),
         check('id').isLength({min:36,max:36})
-    ],apiController.getSession)
+    ],sessionController.getSession)
 
         /**
          * Auth Routes

@@ -54,12 +54,27 @@ let createUser:(req:Request,res:Response)=>void= async (req:Request,res:Response
         phoneNum: req.body.phoneNumber,
         password:req.body.password
     }
-
-        if (await authService.createUser(userData)==null){
+        await authService.createUser(userData)
+        .then(async user=>{
+            let token:TokenInterface = await authService.getToken(user)
+            //we will send only certain fields to client, everything but password
+            let userJson ={
+                email: user.email,
+                firsName: user.firstName,
+                lastName: user.lastName,
+                roles: user.roles
+            }
+            res.status(200).json({
+                token:token,
+                user: userJson
+            })
+        })
+        .catch(err=>{
+            console.log('error caught')
+            console.log(err)
             res.send('user already exists')
-        }else{
-            res.send('done');
-        }
+        })
+
 
 }
 

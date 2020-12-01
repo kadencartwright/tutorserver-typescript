@@ -26,6 +26,7 @@ export class User extends BaseEntity implements UserInterface{
     roles: Role[]
 
     init: (userData:UserInterface) =>void = function(userData:UserInterface){
+        console.log('user.init Called')
         this.email = userData.email
         this.firstName = userData.firstName
         this.lastName = userData.lastName

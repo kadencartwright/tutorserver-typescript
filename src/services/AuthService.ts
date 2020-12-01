@@ -7,6 +7,7 @@ import { User } from '../models/User';
 import {Service} from 'typedi';
 import {verify,sign} from 'jsonwebtoken';
 import { getConnection } from 'typeorm';
+import { login } from '../controllers/authController';
 @Service()
 export default class AuthService{
     private helpers:Helpers
@@ -14,9 +15,12 @@ export default class AuthService{
         this.helpers = new Helpers();
     }
     login: (loginData:LoginInterface) => Promise<User> = async function(loginData:LoginInterface){
-        let user:User = await User.findOne({email:loginData.email},{ relations: ["roles"] })
+        console.log(loginData)
+        loginData.email = loginData.email.toLowerCase()
+        let user:User = await User.findOneOrFail(loginData.email,{ relations: ["roles"] })
         let validPassword:boolean = await this.helpers.verifyPassword(loginData.password, user.password)
         if (validPassword){
+
             return user
         }else{
             return undefined
@@ -25,15 +29,25 @@ export default class AuthService{
 
     createUser: (userData:UserInterface)=>Promise<User> = async function(userData:UserInterface){
         let roles:Role[] =[];
-        userData.roles = Array.from(userData.roles)
-        for (let role of userData.roles){
-            roles.push(await Role.findOne(role))
+
+        if (userData.roles){
+            userData.roles = Array.from(userData.roles)
+            for (let role of userData.roles){
+                roles.push(await Role.findOne(role))
+                
+            }
+            
+        }else{
+            roles.push(await Role.findOne({type:'student'}))//assign role of student if none is supplied
         }
+       
         let user:User = new User()
+        userData.email = userData.email.toLowerCase()//all emails are stored lowercase
         user.init({email:userData.email,firstName:userData.firstName,lastName:userData.lastName,phoneNum:userData.phoneNum,password:userData.password,roles:roles})
         let alreadyExists:boolean = await !!!User.findOne(user.email); //if user already exists this returns true
+        console.log(alreadyExists)
         if(alreadyExists){
-            return null //return undefined if user already exist
+            throw new Error('user already exists')
         }else{
             user.password = await this.helpers.hashPassword(user.password)//hash password before creating
             let result:User = await User.save(user)
