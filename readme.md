@@ -27,6 +27,7 @@ Starts the server on $PORT or defaults to port 5000 if no $PORT is specified wit
             "email": String,
             "password": String,
             "phoneNumber":String
+            optional - "roles": [{type:'student'},{type:'admin'},{type:'tutor'} //without specified roles, user will be a student
         }
 
 
