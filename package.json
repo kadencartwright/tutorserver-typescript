@@ -8,7 +8,6 @@
     "build": "tsc",
     "start": "NODE_ENV=PROD node dist/index.js",
     "postinstall": "tsc"
-
   },
   "keywords": [],
   "author": "",

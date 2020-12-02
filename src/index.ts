@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
+import cors from 'cors';
 import router from './routes/router';
 import "reflect-metadata";
 import {createConnection} from 'typeorm'
@@ -13,6 +14,7 @@ dotenv.config()
 const app = express();
 const PORT = process.env.PORT ||3000
 app.use(json())
+app.use(cors())
 app.use(urlencoded({extended:true}))
 let entitiesDir: String = '/models/*.ts'
 if (process.env.NODE_ENV == 'PROD'){
