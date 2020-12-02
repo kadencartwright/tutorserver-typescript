@@ -13,14 +13,14 @@ Starts the server on $PORT or defaults to port 5000 if no $PORT is specified wit
 
 
 ### ENDPOINTS
-    -/api/v1/login
+    -/api/v1/auth/login
         {
             "email": String,
             "password": String
         }
 
 
-    -/api/v1/create-user
+    -/api/v1/auth/create-user
         {
 	        "firstName": String,
 	        "lastName": String,
@@ -33,8 +33,8 @@ Starts the server on $PORT or defaults to port 5000 if no $PORT is specified wit
 
     -/api/v1/get-sessions-in-range !!requires JWT
         {
-	        "endTime": JS Datetime,
-	        "startTime": JS Datetime
+	        "endTime": js datetime converted to milliseconds,
+	        "startTime": js datetime converted to milliseconds
         }
 
 
