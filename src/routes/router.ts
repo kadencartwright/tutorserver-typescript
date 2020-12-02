@@ -27,6 +27,14 @@ router.get('/', (req,res)=>{
         check('id').isLength({min:36,max:36})
     ],sessionController.getSession)
 
+    apiRouter.post('/session',[
+        check('course').isString(),
+        check('tutor').isString(),
+        check('student').isString(),
+        check('startTime').isNumeric(),
+        check('endTime').isNumeric(),
+    ],sessionController.createSession)
+
         /**
          * Auth Routes
          * (/api/v1/auth/*) 
