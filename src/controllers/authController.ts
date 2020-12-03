@@ -52,7 +52,8 @@ let createUser:(req:Request,res:Response)=>void= async (req:Request,res:Response
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         phoneNum: req.body.phoneNumber,
-        password:req.body.password
+        password:req.body.password,
+        roles: req.body.roles
     }
         await authService.createUser(userData)
         .then(async user=>{
