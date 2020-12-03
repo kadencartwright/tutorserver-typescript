@@ -24,6 +24,8 @@ let createSession:  (req:Request,res:Response)=>void = async function(req,res){
         return res.status(400).json({ errors: errors.array() });
     }
     const sessionService = Container.get(SessionService)
+    req.body.startTime = new Date(req.body.startTime)
+    req.body.endTime = new Date(req.body.endTime)
     let sessionData:SessionInterface = {
         course:req.body.course,
         startTime: req.body.startTime,
