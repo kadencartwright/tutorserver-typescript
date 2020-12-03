@@ -30,4 +30,10 @@ export class Session extends BaseEntity implements SessionInterface{
         this.startTime = sessionData.startTime
         this.endTime = sessionData.endTime
     }
+    toJson: ()=>{} = function(){
+        let out = {...this}
+        out.startTime = out.startTime.getTime()
+        out.endTime = out.endTime.getTime()
+        return out
+    }
 }

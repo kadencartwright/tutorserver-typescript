@@ -14,17 +14,21 @@ export default class SessionService{
     }
     //createSession:()
 
-    getSessionsInRange: (start:Date, end:Date)=>Promise<Session[]> = async function(start:Date, end:Date){
+    getSessionsInRange: (start:Date, end:Date)=>Promise<Array<any>> = async function(start:Date, end:Date){
         //takes in 2 date objects, converts to number(the way session times are stored in DB) and finds sessions within the range
         let sessions: Session[]
-        let startTime: number = start.getTime()
-        let endTime: number = start.getTime()
+        let startTime: string = start.toISOString()
+        let endTime: string = end.toISOString()
         sessions = await getManager()
                             .createQueryBuilder(Session,'session')
-                            .where('session.startTime > :startTime',{startTime:startTime})
-                            .andWhere('session.starTime < :endTime',{endTime:endTime})
+                            .where('session.startTime BETWEEN :startTime AND :endTime',{startTime:startTime,endTime:endTime})
                             .getMany()
-        return sessions
+
+        let output:any[] = []
+        for (let session of sessions){
+            output.push(session.toJson())
+        }
+        return output
     }
 
     getSession:(id:string) =>Promise<Session> = async function(id:string){

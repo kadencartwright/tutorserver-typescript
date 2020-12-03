@@ -23,7 +23,6 @@ let createSession:  (req:Request,res:Response)=>void = async function(req,res){
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
-    console.log('crrat')
     const sessionService = Container.get(SessionService)
     let sessionData:SessionInterface = {
         course:req.body.course,
@@ -34,8 +33,6 @@ let createSession:  (req:Request,res:Response)=>void = async function(req,res){
     }
     await sessionService.createSession(sessionData)
     .then(session=>{
-        delete session.student.password
-        delete session.tutor.password
         res.status(201).json({
             message:"session created",
             sessionId:session.id
@@ -46,7 +43,22 @@ let createSession:  (req:Request,res:Response)=>void = async function(req,res){
         res.status(500).send('sorry, there was an issue on our end')
     })
 
-
 }
 
-export {getSession,createSession}
+let getSessionsInRange: (req:Request,res:Response)=>void = async function(req,res){
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    let start:Date = new Date(req.body.startTime)
+    let end:Date = new Date(req.body.endTime)
+
+    console.log({start:start,end:end})
+    const sessionService = Container.get(SessionService)
+    await sessionService.getSessionsInRange(start,end).then(sessions=>{
+        res.status(200).json(sessions).send()
+    })
+}
+
+
+export {getSession,createSession,getSessionsInRange}

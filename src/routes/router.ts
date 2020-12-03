@@ -26,7 +26,6 @@ router.get('/', (req,res)=>{
         check('id').isString(),
         check('id').isLength({min:36,max:36})
     ],sessionController.getSession)
-
     apiRouter.post('/session',[
         check('course').isString(),
         check('tutor').isString(),
@@ -34,7 +33,11 @@ router.get('/', (req,res)=>{
         check('startTime').isNumeric(),
         check('endTime').isNumeric(),
     ],sessionController.createSession)
-
+    
+    apiRouter.get('/sessions-in-range',[
+        check('startTime').isNumeric(),
+        check('endTime').isNumeric(),
+    ], sessionController.getSessionsInRange)
         /**
          * Auth Routes
          * (/api/v1/auth/*) 
