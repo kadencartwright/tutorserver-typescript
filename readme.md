@@ -13,13 +13,14 @@ Starts the server on $PORT or defaults to port 5000 if no $PORT is specified wit
 
 
 ### ENDPOINTS
+    POST request
     -/api/v1/auth/login
         {
             "email": String,
             "password": String
         }
 
-
+    POST request
     -/api/v1/auth/create-user
         {
 	        "firstName": String,
@@ -30,15 +31,15 @@ Starts the server on $PORT or defaults to port 5000 if no $PORT is specified wit
             optional - "roles": [{type:'student'},{type:'admin'},{type:'tutor'} //without specified roles, user will be a student
         }
 
-
-    -/api/v1/get-sessions-in-range !!requires JWT
+    GET request
+    -/api/v1/sessions-in-range !!requires JWT
         {
 	        "endTime": js datetime converted to milliseconds,
 	        "startTime": js datetime converted to milliseconds
         }
 
-
-    -/api/v1/get-session !!requires JWT
+    GET request
+    -/api/v1/session !!requires JWT
         required params
         {
             "sessionId": GUID of Session
