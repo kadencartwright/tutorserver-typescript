@@ -30,6 +30,7 @@ let login: (req:Request,res:Response)=>void = async function(req,res){
             email: user.email,
             firsName: user.firstName,
             lastName: user.lastName,
+			phoneNumber: user.phoneNum,
             roles: user.roles
         }
         res.status(200).json({
@@ -63,6 +64,7 @@ let createUser:(req:Request,res:Response)=>void= async (req:Request,res:Response
                 email: user.email,
                 firsName: user.firstName,
                 lastName: user.lastName,
+				phoneNumber: user.phoneNum,
                 roles: user.roles
             }
             res.status(200).json({
