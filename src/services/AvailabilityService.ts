@@ -17,8 +17,7 @@ export default class AvailabilityService{
     createAvailability: (availabilityData:AvailabilityInterface) => Promise<Availability> = async function(availabilityData:AvailabilityInterface){
         
         let availability:Availability =new Availability()//create a new role and pass in the data
-        
-        
+    
         availability.init(availabilityData)
         console.table(availability);
         return await Availability.save(availability)
