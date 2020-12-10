@@ -31,6 +31,11 @@ export default class SessionService{
         return output
     }
 
+    getSessions:() => Promise<Session[]> = async function(){
+        let sessions:Session[] = await Session.find()
+        return sessions
+    }
+
     getSession:(id:string) =>Promise<Session> = async function(id:string){
         let session:Session = await Session.findOne({id: id})
         return session

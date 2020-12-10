@@ -46,6 +46,7 @@ router.get('/', (req,res)=>{
         check('startTime').isNumeric(),
         check('endTime').isNumeric(),
     ], sessionController.getSessionsInRange)
+    apiRouter.get('/sessions',sessionController.getSessions);
         /**
          * Auth Routes
          * (/api/v1/auth/*) 

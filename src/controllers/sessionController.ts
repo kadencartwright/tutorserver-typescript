@@ -1,3 +1,4 @@
+import { Session } from './../models/Session';
 import { SessionInterface } from './../interfaces/sessionInterface';
 import { Container } from 'typedi';
 import { validationResult } from 'express-validator';
@@ -63,8 +64,19 @@ let getSessionsInRange: (req:Request,res:Response)=>void = async function(req,re
             res.status(200).json(sessions)
         })
     }
+}
+let getSessions: (req:Request,res:Response)=>void = async function(req,res){
+    const sessionService = Container.get(SessionService)
+    try{
+        let sessions:Session[] = await sessionService.getSessions();
+        res.status(200).json(sessions)
+    }catch(e){
+        console.log(e)
+        res.status(500).send('sorry, something went wrong')
+    }
+
 
 }
 
 
-export {getSession,createSession,getSessionsInRange}
+export {getSession,createSession,getSessionsInRange,getSessions}
