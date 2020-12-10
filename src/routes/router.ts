@@ -6,6 +6,7 @@ var router: Router = Router()
 var apiRouter: Router = Router()
 var authRouter: Router = Router()
 import * as dbInitController from '../controllers/dbInitController'
+import * as availabilityController from '../controllers/availabilityController'
 
 /**
  * Root Routes
@@ -34,6 +35,13 @@ router.get('/', (req,res)=>{
         check('endTime').isNumeric(),
     ],sessionController.createSession)
     
+    apiRouter.post('/availability',[
+        check('startTime').isNumeric(),
+        check('endTime').isNumeric(),
+        check('day').isNumeric(),
+        check('tutorEmail').isString()
+    ], availabilityController.createAvailability)
+
     apiRouter.get('/sessions-in-range',[
         check('startTime').isNumeric(),
         check('endTime').isNumeric(),

@@ -21,7 +21,7 @@ export class Availability extends BaseEntity implements AvailabilityInterface{
     init: (availabilityData:AvailabilityInterface)=>void=function(availabilityData:AvailabilityInterface){
         this.day = availabilityData.day
         this.endTime = availabilityData.endTime
-        this.endTime = availabilityData.endTime
+        this.startTime = availabilityData.startTime
         this.tutor = availabilityData.tutor
         }
 
