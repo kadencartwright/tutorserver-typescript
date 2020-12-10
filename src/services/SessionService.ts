@@ -31,8 +31,12 @@ export default class SessionService{
         return output
     }
 
-    getSessions:() => Promise<Session[]> = async function(){
-        let sessions:Session[] = await Session.find()
+    getSessions:() => Promise<SessionInterface[]> = async function(){
+        let sessions:SessionInterface[] = await Session.find({ relations: ["tutor","student"] })
+        for (let session of sessions){
+            if(session.tutor!=null){delete session.tutor.password}
+            if (session.student!=null){delete session.student.password}
+        }
         return sessions
     }
 
