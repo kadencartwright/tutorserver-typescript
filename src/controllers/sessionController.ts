@@ -48,18 +48,22 @@ let createSession:  (req:Request,res:Response)=>void = async function(req,res){
 }
 
 let getSessionsInRange: (req:Request,res:Response)=>void = async function(req,res){
+    console.table(req.query)
+    let data:any = req.query;
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
+    }else{
+        let start:Date = new Date(Number.parseInt(data.startTime))
+        let end:Date = new Date(Number.parseInt(data.endTime))
+    
+        console.log({start:start,end:end})
+        const sessionService = Container.get(SessionService)
+        await sessionService.getSessionsInRange(start,end).then(sessions=>{
+            res.status(200).json(sessions)
+        })
     }
-    let start:Date = new Date(req.body.startTime)
-    let end:Date = new Date(req.body.endTime)
 
-    console.log({start:start,end:end})
-    const sessionService = Container.get(SessionService)
-    await sessionService.getSessionsInRange(start,end).then(sessions=>{
-        res.status(200).json(sessions).send()
-    })
 }
 
 
